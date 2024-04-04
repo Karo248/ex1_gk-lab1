@@ -16,41 +16,40 @@
     <script>
         "use strict";
 
-        var canvas;    // The canvas element on which we will draw.
-        var graphics;  // A 2D graphics context for drawing on the canvas.
+        var canvas;    
+        var graphics;  
 
         function draw() {
             graphics.clearRect(0, 0, 400, 400);
 
-            // Obrót o -90 stopni
+            
             graphics.save();
             graphics.translate(200, 200);
             graphics.rotate(-Math.PI / 2);
 
-            // Rysowanie owalu z bardziej intensywnym kolor wypełnienia i czarnym obramowaniem
-            graphics.fillStyle = 'rgb(255, 100, 100)'; // Bardziej intensywny kolor
-            graphics.fillOval(0, 0, 100, 150); // Centrum owalu przesunięte do lewej o połowę szerokości i w dół o połowę wysokości
+            
+            graphics.fillStyle = 'rgb(255, 100, 100)'
+            graphics.fillOval(0, 0, 100, 150); 
 
             graphics.strokeStyle = 'black';
             graphics.lineWidth = 2;
             graphics.strokeOval(0, 0, 100, 150);
             graphics.restore();
 
-            // Rysowanie uśmiechu (czarnego łuku)
+            
             graphics.strokeStyle = 'black';
             graphics.lineWidth = 2;
             graphics.beginPath();
             graphics.arc(200, 200, 50, 0.2 * Math.PI, 0.8 * Math.PI);
             graphics.stroke();
 
-            // Rysowanie oczu (białe i czarne koła)
-            // Lewe oko
+            
             graphics.fillStyle = 'white';
             graphics.fillCircle(170, 180, 10);
             graphics.fillStyle = 'black';
             graphics.fillCircle(170, 180, 4);
 
-            // Prawe oko
+            
             graphics.fillStyle = 'white';
             graphics.fillCircle(230, 180, 10);
             graphics.fillStyle = 'black';
@@ -95,7 +94,7 @@
                     "An error occurred while initializing graphics.";
             }
             addGraphicsContextExtras(graphics);
-            draw();  // Call draw() to draw on the canvas.
+            draw();  
         }
     </script>
 </body>
