@@ -22,13 +22,14 @@
         function draw() {
             graphics.clearRect(0, 0, 400, 400);
 
-            // Rysowanie owalu z różowym wypełnieniem i czarnym obramowaniem
-            graphics.fillStyle = 'pink';
-            graphics.fillOval(150, 150, 100, 150);
+           
+            graphics.fillStyle = 'rgb(255, 100, 100)'; 
+            graphics.fillOval(-150, -100, 150, 100);
 
             graphics.strokeStyle = 'black';
             graphics.lineWidth = 2;
-            graphics.strokeOval(150, 150, 100, 150);
+            graphics.strokeOval(-150, -100, 150, 100);
+            graphics.restore();
 
             
             graphics.strokeStyle = 'black';
