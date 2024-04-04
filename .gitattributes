@@ -22,38 +22,39 @@
         function draw() {
             graphics.clearRect(0, 0, 400, 400);
 
-            
+            // Obrót o -90 stopni
             graphics.save();
             graphics.translate(200, 200);
-            graphics.rotate(Math.PI / 2);
+            graphics.rotate(-Math.PI / 2);
 
-            
-            graphics.fillStyle = 'rgb(255, 100, 100)'; 
-            graphics.fillOval(-150, -100, 150, 100);
+            // Rysowanie owalu z bardziej intensywnym kolor wypełnienia i czarnym obramowaniem
+            graphics.fillStyle = 'rgb(255, 100, 100)'; // Bardziej intensywny kolor
+            graphics.fillOval(0, 0, 100, 150); // Centrum owalu przesunięte do lewej o połowę szerokości i w dół o połowę wysokości
 
             graphics.strokeStyle = 'black';
             graphics.lineWidth = 2;
-            graphics.strokeOval(-150, -100, 150, 100);
+            graphics.strokeOval(0, 0, 100, 150);
             graphics.restore();
 
-            
+            // Rysowanie uśmiechu (czarnego łuku)
             graphics.strokeStyle = 'black';
             graphics.lineWidth = 2;
             graphics.beginPath();
             graphics.arc(200, 200, 50, 0.2 * Math.PI, 0.8 * Math.PI);
             graphics.stroke();
 
-            
+            // Rysowanie oczu (białe i czarne koła)
+            // Lewe oko
             graphics.fillStyle = 'white';
-            graphics.fillCircle(180, 170, 10);
+            graphics.fillCircle(170, 180, 10);
             graphics.fillStyle = 'black';
-            graphics.fillCircle(180, 170, 4);
+            graphics.fillCircle(170, 180, 4);
 
-            
+            // Prawe oko
             graphics.fillStyle = 'white';
-            graphics.fillCircle(180, 230, 10);
+            graphics.fillCircle(230, 180, 10);
             graphics.fillStyle = 'black';
-            graphics.fillCircle(180, 230, 4);
+            graphics.fillCircle(230, 180, 4);
         }
 
         function addGraphicsContextExtras(graphics) {
