@@ -1,64 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canvas Drawing</title>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
-<body>
-  <canvas id="myCanvas" width="400" height="400"></canvas>
+<body onload="init()">
+    <canvas id="canvas" width="400" height="400"></canvas>
 
-  <script>
-    var canvas = document.getElementById('myCanvas');
-    var ctx = canvas.getContext('2d');
+    <script>
+        "use strict";
 
-   
-    function drawSmiley() {
-      
-      ctx.fillStyle = 'pink';
-      ctx.beginPath();
-      ctx.ellipse(200, 200, 100, 150, 0, 0, Math.PI * 2);
-      ctx.fill();
+        var canvas;    // The canvas element on which we will draw.
+        var graphics;  // A 2D graphics context for drawing on the canvas.
 
-      
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 2;
-      ctx.stroke();
+        function draw() {
+            graphics.clearRect(0, 0, 400, 400);
 
-      
-      ctx.beginPath();
-      ctx.arc(200, 200, 80, 0.2 * Math.PI, 0.8 * Math.PI);
-      ctx.stroke();
+            // Rysowanie owalu z różowym wypełnieniem i czarnym obramowaniem
+            graphics.fillStyle = 'pink';
+            graphics.fillOval(150, 150, 100, 150);
 
-     
-      ctx.fillStyle = 'white';
-      ctx.beginPath();
-      ctx.arc(160, 170, 10, 0, Math.PI * 2);
-      ctx.fill();
+            graphics.strokeStyle = 'black';
+            graphics.lineWidth = 2;
+            graphics.strokeOval(150, 150, 100, 150);
 
-      
-      ctx.beginPath();
-      ctx.arc(240, 170, 10, 0, Math.PI * 2);
-      ctx.fill();
+            
+            graphics.strokeStyle = 'black';
+            graphics.lineWidth = 2;
+            graphics.beginPath();
+            graphics.arc(200, 230, 50, 0.2 * Math.PI, 0.8 * Math.PI);
+            graphics.stroke();
 
-      
-      ctx.fillStyle = 'black';
-      ctx.beginPath();
-      ctx.arc(160, 170, 4, 0, Math.PI * 2);
-      ctx.fill();
+            
+            graphics.fillStyle = 'white';
+            graphics.fillCircle(170, 180, 10);
+            graphics.fillStyle = 'black';
+            graphics.fillCircle(170, 180, 4);
 
-      ctx.beginPath();
-      ctx.arc(240, 170, 4, 0, Math.PI * 2);
-      ctx.fill();
-    }
+            
+            graphics.fillStyle = 'white';
+            graphics.fillCircle(230, 180, 10);
+            graphics.fillStyle = 'black';
+            graphics.fillCircle(230, 180, 4);
+        }
 
-    drawSmiley(); 
-  </script>
+        function addGraphicsContextExtras(graphics) {
+            graphics.fillOval = function (x, y, rx, ry) {
+                this.beginPath();
+                this.save();
+                this.translate(x, y);
+                this.scale(rx, ry);
+                this.arc(0, 0, 1, 0, 2 * Math.PI, false);
+                this.restore();
+                this.fill();
+            }
+
+            graphics.strokeOval = function (x, y, rx, ry) {
+                this.beginPath();
+                this.save();
+                this.translate(x, y);
+                this.scale(rx, ry);
+                this.arc(0, 0, 1, 0, 2 * Math.PI, false);
+                this.restore();
+                this.stroke();
+            }
+
+            graphics.fillCircle = function (x, y, r) {
+                this.beginPath();
+                this.arc(x, y, r, 0, 2 * Math.PI, false);
+                this.fill();
+            }
+        }
+
+        function init() {
+            try {
+                canvas = document.getElementById("canvas");
+                graphics = canvas.getContext("2d");
+            } catch (e) {
+                document.getElementById("canvas").innerHTML =
+                    "Canvas graphics is not supported.<br>" +
+                    "An error occurred while initializing graphics.";
+            }
+            addGraphicsContextExtras(graphics);
+            draw();  // Call draw() to draw on the canvas.
+        }
+    </script>
 </body>
 </html>
 
